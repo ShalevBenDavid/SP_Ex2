@@ -1,12 +1,13 @@
 // Created by Yuval and Shalev.
 #include <stdio.h>
-int Mat[10][10];
-int FloydMat[10][10];
+#define SIZE 10
+int Mat[SIZE][SIZE];
+int FloydMat[SIZE][SIZE];
 void CreateFloydMat();
 
 void A() {
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
             scanf("%d", &Mat[i][j]);
             printf("\n");
         }
@@ -15,11 +16,11 @@ void A() {
 }
 
 void CreateFloydMat() {
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < SIZE; i++)
         FloydMat[i][i] = 0;
-    for (int k = 0; k < 10; k++) {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+    for (int k = 0; k < SIZE; k++) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
                 if (i != j)
                     FloydMat[i][j] = (Mat[i][k] + Mat[k][j] < Mat[i][j]) ? Mat[i][k] + Mat[k][j] : Mat[i][j];
             }
