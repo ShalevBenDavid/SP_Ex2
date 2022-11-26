@@ -7,22 +7,27 @@ int main()
     char func = 0;
     int i = 0, j = 0;
     do {
-        scanf("%c", &func);
+        if (scanf("%c", &func) == EOF)
+            goto end;
         switch (func) {
             case 'A':
                 A();
                 break;
             case 'B':
-                scanf("%d %d", &i, &j);
+                if (scanf("%d %d", &i, &j) == EOF)
+                    goto end;
                 B(i, j);
                 break;
             case 'C':
-                scanf("%d %d", &i, &j);
+                if (scanf("%d %d", &i, &j) == EOF)
+                    goto end;
                 C(i, j);
                 break;
             default:
                 break;
         }
     } while (func != 'D');
+    end:
+    printf("\n");
     return 0;
 }

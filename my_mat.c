@@ -1,28 +1,37 @@
 // Created by Yuval and Shalev.
 #include <stdio.h>
+#include "my_mat.h"
 #define SIZE 10
-int Mat[SIZE][SIZE];
-int FloydMat[SIZE][SIZE];
+int Mat[SIZE][SIZE] = {0};
+int FloydMat[SIZE][SIZE] = {0};
 void CreateFloydMat();
 
 void A() {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            scanf("%d", &Mat[i][j]);
-            printf("\n");
+            if (scanf("%d", &Mat[i][j]) == EOF)
+                return;
         }
     }
     CreateFloydMat();
 }
 
 void CreateFloydMat() {
-    for (int i = 0; i < SIZE; i++)
-        FloydMat[i][i] = 0;
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            FloydMat[i][j] = Mat[i][j];
+        }
+    }
     for (int k = 0; k < SIZE; k++) {
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                if (i != j)
-                    FloydMat[i][j] = (Mat[i][k] + Mat[k][j] < Mat[i][j]) ? Mat[i][k] + Mat[k][j] : Mat[i][j];
+                if ((i != j) && (FloydMat[i][k] > 0) && (FloydMat[k][j] > 0)) {
+                    int sum = FloydMat[i][k] + FloydMat[k][j];
+                    if (FloydMat[i][j] == 0)
+                        FloydMat[i][j] = sum;
+                    else
+                        FloydMat[i][j] = (sum < FloydMat[i][j]) ? sum : FloydMat[i][j];
+                }
             }
         }
     }
@@ -31,7 +40,9 @@ void CreateFloydMat() {
 void B (int i, int j) {
     if (FloydMat[i][j] > 0)
         printf("True");
-    printf("False");
+    else {
+        printf("False");
+    }
     printf("\n");
 }
 
