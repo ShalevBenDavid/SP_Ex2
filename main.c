@@ -28,6 +28,5 @@ int main()
         }
     } while (func != 'D');
     end:
-    printf("\n");
     return 0;
 }
